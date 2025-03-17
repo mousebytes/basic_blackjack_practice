@@ -65,4 +65,5 @@ void print_deck(vector<Card> &deck)
         cout << "\n" << "card type: " << deck[i].card_type << "\tcard val: " << deck[i].card_value<< "\tcard name: " << deck[i].card_name;
     }
     cout << "\n" << deck.size();
+    
 }
