@@ -1,0 +1,8 @@
+
+-- compiling separately --
+g++ -Iinclude -c src/Deck.cpp -o Deck.o
+g++ -Iinclude -c src/Card.cpp -o Card.o
+g++ -Iinclude -c main.cpp -o main.o
+
+-- link together --
+g++ main.o Deck.o Card.o -o main // creates exe named main with everything linked
