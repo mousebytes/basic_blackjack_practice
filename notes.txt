@@ -2,7 +2,9 @@
 -- compiling separately --
 g++ -Iinclude -c src/Deck.cpp -o Deck.o
 g++ -Iinclude -c src/Card.cpp -o Card.o
+g++ -Iinclude -c src/Game.cpp -o Game.o
+g++ -Iinclude -c src/Player.cpp -o Player.o
 g++ -Iinclude -c main.cpp -o main.o
 
 -- link together --
-g++ main.o Deck.o Card.o -o main // creates exe named main with everything linked
+g++ main.o Deck.o Card.o Game.o Player.o -o main // creates exe named main with everything linked
