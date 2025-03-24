@@ -9,6 +9,7 @@ Player::Player()
     aces_present = false;
     jack_present = false;
     standing = false;
+    bet = 0.0;
 }
 
 void Player::add_card_to_player_hand(Card c)
@@ -20,7 +21,7 @@ void Player::add_card_to_player_hand(Card c)
     hand.push_back(c);
 }
 
-std::pair<int,int> Player::calculate_player_score()
+void Player::calculate_player_score()
 {
     player_score = {0,0}; // reset the score
     if((jack_present && aces_present) && hand.size() == 2) // blackjack!!
@@ -46,7 +47,6 @@ std::pair<int,int> Player::calculate_player_score()
             player_score.first += c.card_value;
         player_score.second = 0;
     }
-    return player_score;
 }
 
 void Player::reset_player_hand()

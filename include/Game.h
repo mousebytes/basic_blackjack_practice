@@ -12,7 +12,7 @@ struct Game
     Game();
 
     void start_game();
-    void check_for_end_of_game(std::pair<int,int> player_score, std::pair<int,int> dealer_score);
+    int check_for_end_of_game(std::pair<int,int> player_score, std::pair<int,int> dealer_score);
     void game_loop();
 };
 
