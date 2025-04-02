@@ -6,7 +6,7 @@
 #include"include/Player.h"
 
 // TODO: Create UI :)
-// TODO: Add playability, duh
+// TODO: Add playability, duh -- DONE
 // TODO: Lose mind -- DONE
 
 
