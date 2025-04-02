@@ -20,50 +20,39 @@ void Game::start_game()
     game_loop();
 
     // debugging
-    std::cout << "\nDealer: " << dealer.calculate_player_score().first << " & " << dealer.calculate_player_score().second;
-    std::cout << "\nPlayer: " << plyr.calculate_player_score().first << " & " << plyr.calculate_player_score().second;
+    //std::cout << "\nDealer: " << dealer.calculate_player_score().first << " & " << dealer.calculate_player_score().second;
+    //std::cout << "\nPlayer: " << plyr.calculate_player_score().first << " & " << plyr.calculate_player_score().second;
 
 
 }
 
-void Game::check_for_end_of_game(std::pair<int,int> player_score, std::pair<int,int> dealer_score)
+// 0 for player win, 1 for dealer win, 2 for draw
+int Game::check_for_end_of_game(std::pair<int,int> player_score, std::pair<int,int> dealer_score)
 {
-    // ternary operator to check for best score
-    int player_best_score = (player_score.second <= 21) ? player_score.second : player_score.first;
-    int dealer_best_score = (dealer_score.second <= 21) ? dealer_score.second : dealer_score.first;
+    // this function needs to check for win conditions, such as when the dealer or player bust
+    // some other win cons can be
+    // player has 21 while dealer does not and vice versa
+    // player has a greater score than dealer that does not exceed 21 or vice versa
 
-    end_of_game = false;
-
-    if(player_best_score > 21)
+    if (player_score.first > 21) // this is the case where aces are worth 1 pt, meaning if this is greater than 21 they bust
     {
-        std::cout << "\nPlayer bust";
-        end_of_game = true;
+        return 1; // dealer won since player bust
     }
-    if(dealer_best_score > 21)
+    if(dealer_score.first > 21) // same as above but for dealer
     {
-        std::cout << "\nDealer bust";
-        end_of_game = true;
+        return 0; // player won since dealer bust
     }
 
+    
 
-    if(standing)
-    {
-        if(dealer_best_score > player_best_score)
-    {
-        std::cout << "\nDealer wins";
-        end_of_game = true;
-    }
-        if(player_best_score > dealer_best_score)
-        {
-            std::cout << "\nPlayer wins";
-            end_of_game = true;
-        }
-        if(player_best_score == dealer_best_score)
-        {
-            std::cout << "\nDraw";
-            end_of_game = true;
-        }
-    }
+
+
+    // TODO: i don't think this works, check back on it later
+    // this is the last case where the dealer and player scores are the same
+    if(player_score.first == dealer_score.first && player_score.second == dealer_score.second)
+
+
+    std::cout << "\np.first: " << player_score.first << "p.second: " << player_score.second << "d.first: " << dealer_score.first << "d.second: " << dealer_score.second;
     
     
 }
@@ -86,6 +75,14 @@ void Game::game_loop()
         // player gets two cards into hand second
         plyr.add_card_to_player_hand(game_deck.choose_random_card());
         plyr.add_card_to_player_hand(game_deck.choose_random_card());
+
+
+        //debugging section
+        plyr.calculate_player_score();
+        dealer.calculate_player_score();
+
+        check_for_end_of_game(plyr.player_score, dealer.player_score);
+        end_of_game = true;
 
 
     } while (!end_of_game);
