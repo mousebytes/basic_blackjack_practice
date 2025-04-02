@@ -7,7 +7,7 @@ Player::Player()
     player_score = {};
     is_dealer = false;
     aces_present = false;
-    jack_present = false;
+    face_present = false;
     standing = false;
     bet = 0.0;
 }
@@ -16,15 +16,15 @@ void Player::add_card_to_player_hand(Card c)
 {
     if(c.card_value == 1)
         aces_present = true;
-    if(c.card_value == 11)
-        jack_present = true;
+    if(c.card_value == 10 && c.card_name!="Ten")
+        face_present = true;
     hand.push_back(c);
 }
 
 void Player::calculate_player_score()
 {
     player_score = {0,0}; // reset the score
-    if((jack_present && aces_present) && hand.size() == 2) // blackjack!!
+    if((face_present && aces_present) && hand.size() == 2) // blackjack!!
     {
         player_score.first = 21;
         player_score.second = 0;

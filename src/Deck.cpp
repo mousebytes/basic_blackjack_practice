@@ -22,7 +22,10 @@ void Deck::populate_deck()
         if(vals == 13) // if it reaches the end of a set (Ace (1) through King (13) -> reset to new set)
             vals = 0;
         temp_card.card_type = i % 4; // change the type (hearts, clubs, etc) based on what its i remainder is
-        temp_card.card_value = vals+1; // change the card value based on the int being changed per iteration and set
+        if(vals > 9) // for all vals greater than 9, 10,J,Q,K = val of 10
+            temp_card.card_value = 10; // face cards = 10
+        else
+            temp_card.card_value = vals+1; // change the card value based on the int being changed per iteration and set
         temp_card.card_name = card_names[vals]; // change the cards name based on the previously mentioned int from a globally defined araay
         deck.push_back(temp_card); // push the new card into the vector that will be sent back
         ++vals; // increment the value that keeps track of the set
