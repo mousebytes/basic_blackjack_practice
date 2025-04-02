@@ -14,6 +14,10 @@ struct Game
     void start_game();
     int check_for_end_of_game(std::pair<int,int> player_score, std::pair<int,int> dealer_score);
     void game_loop(Deck &);
+    int return_best_scores(Player p);
+    void print_dealer_and_player_cards();
+
+
 };
 
 
